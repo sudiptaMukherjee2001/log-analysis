@@ -33,15 +33,17 @@ pipeline{
                     sh "docker scout cves sudipta4docker/log-analysis-pipeline:ai-agent"
                 }
             }
-            post{
-                success{
-                    echo "========Image vulnerability scanning completed successfully========"
-                    
+        }
+        stage("push the images to docker hub"){
+            steps{
+                
 
-                }
-                failure{
-                    echo "========Image vulnerability scanning execution failed========"
-                }
+                    echo "========Pushing the images to docker hub========"
+                    sh "docker push sudipta4docker/log-analysis-pipeline:frontend"
+                    sh "docker push sudipta4docker/log-analysis-pipeline:backend"
+                    sh "docker push sudipta4docker/log-analysis-pipeline:ai-agent"
+                   
+                
             }
         }
     }
