@@ -6,11 +6,12 @@ pipeline{
         stage("Build the images"){
             steps{
                 echo "========Creating the images========"
-                sh "docker compose up --build"
+                sh "docker compose build --no-cache"
             }
             post{
                 success{
                     echo "========Build the images executed successfully========"
+                    sh "docker images"
                 }
                 failure{
                     echo "========Build the images execution failed========"
