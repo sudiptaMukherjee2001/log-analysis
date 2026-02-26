@@ -11,7 +11,7 @@ pipeline{
             post{
                 success{
                     echo "========Build the images executed successfully========"
-                    sh "docker images"
+                    sh "docker images | grep log-analysis-pipeline"
                 }
                 failure{
                     echo "========Build the images execution failed========"
