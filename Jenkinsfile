@@ -1,6 +1,6 @@
 pipeline{
     
-        label any
+        agent any
     
     stages{
         stage("Build the images"){
