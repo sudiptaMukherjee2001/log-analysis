@@ -1,7 +1,7 @@
 pipeline{
-    agent{
+    
         label any
-    }
+    
     stages{
         stage("Build the images"){
             steps{
