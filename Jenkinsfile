@@ -21,13 +21,17 @@ pipeline{
         }
         stage("implementation of docker scout for image vulnerability scanning"){
             steps{
-                echo "========Scanning the images for vulnerabilities========"
-                echo "========Scanning the frontend image========"
-                sh "docker scout cves log-analysis-pipeline:frontend"
-                echo "========Scanning the backend image========"
-                sh "docker scout cves log-analysis-pipeline:backend"
-                echo "========Scanning the ai-agent image========"
-                sh "docker scout cves log-analysis-pipeline:ai-agent"
+                withCredentials([usernamePassword(credentialsId: '22b95ae6-c01c-4793-b12b-81ecfc1518ad', passwordVariable: 'docker_password', usernameVariable: 'docker_username')]) {
+                    sh "echo $docker_password | docker login -u $docker_username --password-stdin"
+
+                    echo "========Scanning the images for vulnerabilities========"
+                    echo "========Scanning the frontend image========"
+                    sh "docker scout cves log-analysis-pipeline:frontend"
+                    echo "========Scanning the backend image========"
+                    sh "docker scout cves log-analysis-pipeline:backend"
+                    echo "========Scanning the ai-agent image========"
+                    sh "docker scout cves log-analysis-pipeline:ai-agent"
+                }
             }
             post{
                 success{
