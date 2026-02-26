@@ -6,7 +6,7 @@ pipeline{
         stage("Build the images"){
             steps{
                 echo "========Creating the images========"
-                sh "docker build -t log-analyzer-though-pipeline:${BUILD_NUMBER} ."
+                sh "docker compose up --build"
             }
             post{
                 success{
