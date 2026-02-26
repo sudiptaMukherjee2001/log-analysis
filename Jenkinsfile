@@ -23,11 +23,11 @@ pipeline{
             steps{
                 echo "========Scanning the images for vulnerabilities========"
                 echo "========Scanning the frontend image========"
-                sh "docker scout cve log-analysis-pipeline:frontend"
+                sh "docker scout cves log-analysis-pipeline:frontend"
                 echo "========Scanning the backend image========"
-                sh "docker scout cve log-analysis-pipeline:backend"
+                sh "docker scout cves log-analysis-pipeline:backend"
                 echo "========Scanning the ai-agent image========"
-                sh "docker scout cve log-analysis-pipeline:ai-agent"
+                sh "docker scout cves log-analysis-pipeline:ai-agent"
             }
             post{
                 success{
